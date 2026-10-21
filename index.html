@@ -2,54 +2,13 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Aria</title>
     <style>
-      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #e8dcc8; color: #0b1c33; font-family: system-ui, sans-serif; }
-      main { width: min(24rem, 92vw); }
-      h1 { letter-spacing: 0.28em; font-weight: 600; font-size: 1.4rem; }
-      button, input { width: 100%; box-sizing: border-box; margin: 0.4rem 0; padding: 0.75rem 1rem; border-radius: 999px; border: 0; font: inherit; }
-      button { background: #0b1c33; color: #e8dcc8; }
-      input { background: #f4efe4; color: #0b1c33; }
-      p { min-height: 1.2em; }
+      html, body { margin: 0; height: 100%; background: #e8dcc8; }
+      iframe { border: 0; width: 100%; height: 100%; }
     </style>
   </head>
   <body>
-    <main>
-      <h1>ARIA</h1>
-      <button id="google" type="button">Continuer avec Google</button>
-      <input id="email" type="email" placeholder="Adresse e-mail" autocomplete="username">
-      <input id="password" type="password" placeholder="Mot de passe" autocomplete="current-password">
-      <button id="enter" type="button">Se connecter</button>
-      <button id="create" type="button">Créer le compte</button>
-      <p id="note"></p>
-    </main>
-    <script type="module">
-      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-      const supabase = createClient(
-        'https://rzoqsbxiioaescaoyonh.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6b3FzYnhpaW9hZXNjYW95b25oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU4MjkzNDgsImV4cCI6MjEwMTQwNTM0OH0.9tCIWmpkaObjMcDiKdjD-0PySELrfd4uVrJFtUtUpFk'
-      )
-      const here = 'https://ariaversionnouvelle.github.io/'
-      const note = document.querySelector('#note')
-      const session = await supabase.auth.getSession()
-      if (session.data.session) note.textContent = session.data.session.user.email
-      document.querySelector('#google').onclick = () =>
-        supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: here } })
-      document.querySelector('#enter').onclick = async () => {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: email.value, password: password.value
-        })
-        note.textContent = error ? error.message : email.value
-      }
-      document.querySelector('#create').onclick = async () => {
-        const { error } = await supabase.auth.signUp({
-          email: email.value,
-          password: password.value,
-          options: { emailRedirectTo: here }
-        })
-        note.textContent = error ? error.message : 'Compte créé. Regarde l’e-mail.'
-      }
-    </script>
+    <iframe src="https://ariaversionfonctionnelle.netlify.app" title="Aria"></iframe>
   </body>
 </html>
